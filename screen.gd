@@ -35,7 +35,7 @@ func reset():
 	body.clear()
 	for x in range(3, -5, -1):
 		body.push_back(Vector2(x, 3))
-	head = body.front()
+	head = body[0]
 	snake.sync_data(body)
 	overlay.hide()
 	mirror_node = null
@@ -80,9 +80,9 @@ func step():
 		eating = true
 		score += 1
 		update_score()
-	head = body.front() * 2 - body[1]
+	head = body[0] * 2 - body[1]
 	while inputs.size() > 0:
-		var next = body.front() + inputs.front()
+		var next = body[0] + inputs[0]
 		inputs.pop_front()
 		if next != body[1]:
 			head = next

@@ -9,7 +9,7 @@ var color_2 = Color(0.19, 0.41, 0.31)
 func push_front(pos):
 	var prev_pos
 	if body.size() > 0:
-		var prev = body.front()
+		var prev = body[0]
 		prev_pos = prev.pos
 		prev.set_next(pos)
 	var tile = Tile.instance()
