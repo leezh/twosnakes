@@ -1,0 +1,141 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://two_players.gd" type="Script" id=1]
+[ext_resource path="res://camera.gd" type="Script" id=2]
+[ext_resource path="res://screen.tscn" type="PackedScene" id=3]
+[ext_resource path="res://font.tres" type="DynamicFont" id=4]
+
+[sub_resource type="Animation" id=1]
+
+resource/name = "start"
+length = 4.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:active")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 3 ), "transitions":FloatArray( 1, 1 ), "update":1, "values":[ false, true ] }
+tracks/1/type = "value"
+tracks/1/path = NodePath("left:text")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = { "times":FloatArray( 0, 0.9, 1, 1.9, 2, 2.9, 3, 3.9 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ "3", "", "2", "", "1", "", "GO", "" ] }
+tracks/2/type = "value"
+tracks/2/path = NodePath("right:text")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = { "times":FloatArray( 0, 0.9, 1, 1.9, 2, 2.9, 3, 3.9 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ "3", "", "2", "", "1", "", "GO", "" ] }
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:visibility/opacity")
+tracks/3/interp = 1
+tracks/3/imported = false
+tracks/3/keys = { "times":FloatArray( 0, 0.9, 1, 1.9, 2, 2.9, 3, 3.9 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1, 1 ), "update":0, "values":[ 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0 ] }
+
+[node name="two_players" type="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 330.0
+margin/bottom = 170.0
+script/script = ExtResource( 1 )
+active = false
+
+[node name="camera" type="Camera2D" parent="."]
+
+anchor_mode = 1
+rotating = false
+current = true
+zoom = Vector2( 1, 1 )
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/smoothed = false
+drag_margin/h_enabled = true
+drag_margin/v_enabled = true
+smoothing/enable = false
+smoothing/speed = 5.0
+drag_margin/left = 0.2
+drag_margin/top = 0.2
+drag_margin/right = 0.2
+drag_margin/bottom = 0.2
+script/script = ExtResource( 2 )
+size = null
+
+[node name="left" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 85, 85 )
+mirror = NodePath("../right")
+
+[node name="right" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 245, 85 )
+mirror = NodePath("../left")
+color_1 = Color( 0.49, 0.35, 0.23, 1 )
+color_2 = Color( 0.41, 0.31, 0.19, 1 )
+
+[node name="countdown" type="Control" parent="."]
+
+visibility/opacity = 0.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 10.0
+margin/top = 30.0
+margin/right = 320.0
+margin/bottom = 140.0
+
+[node name="left" type="Label" parent="countdown"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 70.0
+margin/right = 150.0
+margin/bottom = 80.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="right" type="Label" parent="countdown"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 160.0
+margin/top = 70.0
+margin/right = 310.0
+margin/bottom = 80.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="anim" type="AnimationPlayer" parent="countdown"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/start = SubResource( 1 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+
