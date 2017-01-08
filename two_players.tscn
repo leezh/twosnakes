@@ -31,6 +31,16 @@ tracks/3/path = NodePath(".:visibility/opacity")
 tracks/3/interp = 1
 tracks/3/imported = false
 tracks/3/keys = { "times":FloatArray( 0, 0.9, 1, 1.9, 2, 2.9, 3, 3.9 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1, 1 ), "update":0, "values":[ 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0 ] }
+tracks/4/type = "value"
+tracks/4/path = NodePath("../banner:visibility/opacity")
+tracks/4/interp = 1
+tracks/4/imported = false
+tracks/4/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ 1.0, 0.0 ] }
+tracks/5/type = "value"
+tracks/5/path = NodePath("../banner:visibility/visible")
+tracks/5/interp = 1
+tracks/5/imported = false
+tracks/5/keys = { "times":FloatArray( 0.5 ), "transitions":FloatArray( 1 ), "update":1, "values":[ false ] }
 
 [node name="two_players" type="Control"]
 
@@ -137,5 +147,73 @@ playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
+
+[node name="banner" type="Control" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 10.0
+margin/top = 10.0
+margin/right = 320.0
+margin/bottom = 20.0
+
+[node name="title" type="Label" parent="banner"]
+
+anchor/left = 3
+anchor/right = 3
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 25.0
+margin/top = 0.0
+margin/right = -25.0
+margin/bottom = 10.0
+custom_fonts/font = ExtResource( 4 )
+text = "TwoSnakes"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="license" type="Polygon2D" parent="banner"]
+
+visibility/visible = false
+transform/pos = Vector2( 0, 10 )
+polygon = Vector2Array( 0, 0, 310, 0, 310, 140, 0, 140 )
+uv = Vector2Array(  )
+color = Color( 1, 1, 1, 0.784314 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
+
+[node name="gplv3" type="Label" parent="banner/license"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 10.0
+margin/top = 10.0
+margin/right = 300.0
+margin/bottom = 133.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Copyright (C) 2017 Zher Huei Lee <http://leezh.me/>\n\nThis program is free software: you can redistribute it and/or modify\nit under the terms of the GNU General Public License as published by\nthe Free Software Foundation, either version 3 of the License, or\n(at your option) any later version.\n\nThis program is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of\nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\nGNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License\nalong with this program.  If not, see <http://www.gnu.org/licenses/>."
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[connection signal="mouse_enter" from="banner/title" to="banner/license" method="show"]
+
+[connection signal="mouse_exit" from="banner/title" to="banner/license" method="hide"]
 
 
